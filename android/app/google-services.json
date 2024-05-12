@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1062385504689",
+    "project_id": "hackathon-wael-61652",
+    "storage_bucket": "hackathon-wael-61652.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062385504689:android:42a3a686790ec32c866d90",
+        "android_client_info": {
+          "package_name": "com.example.hackathon_wael"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBynapQ0R59zFURh686xY02GbpROu7aOaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
