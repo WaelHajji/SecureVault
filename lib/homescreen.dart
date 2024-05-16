@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_wael/loginscreen.dart';
-import 'package:hackathon_wael/pages/home.dart';
 import 'package:hackathon_wael/pages/sign-in.dart';
 import 'package:hackathon_wael/pages/sign-up.dart';
 import 'package:hackathon_wael/services/camera.service.dart';

@@ -1,10 +1,11 @@
 import 'package:hackathon_wael/locator.dart';
 import 'package:hackathon_wael/pages/models/user.model.dart';
-import 'package:hackathon_wael/pages/profile.dart';
 import 'package:hackathon_wael/pages/widgets/app_button.dart';
 import 'package:hackathon_wael/pages/widgets/app_text_field.dart';
 import 'package:hackathon_wael/services/camera.service.dart';
 import 'package:flutter/material.dart';
+
+import '../../passwordlistscreen.dart';
 
 class SignInSheet extends StatelessWidget {
   SignInSheet({Key? key, required this.user}) : super(key: key);
@@ -15,13 +16,8 @@ class SignInSheet extends StatelessWidget {
 
   Future _signIn(context, user) async {
     if (user.password == _passwordController.text) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => Profile(
-                    user.user,
-                    imagePath: _cameraService.imagePath!,
-                  )));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => PasswordListScreen()));
+
     } else {
       showDialog(
         context: context,

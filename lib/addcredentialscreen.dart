@@ -73,10 +73,16 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    double h = size.height, w = size.width;
+
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xfff5f7ff),
         title: Text('Add a password'),
       ),
+      backgroundColor: Color(0xfff5f7ff),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Form(
@@ -87,6 +93,21 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 controller: _platformController,
                 decoration: InputDecoration(
                   labelText: 'Platform',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+// Rounded corners
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when focused
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -95,11 +116,26 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 20.0),
               TextFormField(
                 controller: _usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username / Email',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+// Rounded corners
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when focused
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -108,12 +144,27 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 20.0),
               TextFormField(
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+// Rounded corners
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when focused
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -123,13 +174,41 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 },
               ),
               SizedBox(height: 20.0),
-              ElevatedButton(
+              TextButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _storeUserInfo(); // Call the function to store user data
                   }
                 },
-                child: Text('Submit'),
+                child: Container(
+                  width: w,
+                  height: h * 0.06,
+                  padding: const EdgeInsets.symmetric(horizontal: 29, vertical: 15),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFF577DF5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Submit Password',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Outfit',
+                          fontWeight: FontWeight.w500,
+                          height: 0.07,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

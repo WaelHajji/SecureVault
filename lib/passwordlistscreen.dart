@@ -143,6 +143,9 @@ class PasswordListScreenState extends State<PasswordListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    double h = size.height, w = size.width;
 
     Widget feedbackWidget = SizedBox();
     if(feedback != ""){
@@ -204,15 +207,44 @@ class PasswordListScreenState extends State<PasswordListScreen> {
                 fontWeight: FontWeight.w600,
 
               ),
-            )] + passwordWidgets +
+            ), SizedBox(height:10),] + passwordWidgets +
 
-            [
-              TextButton(onPressed: (){
+            [SizedBox(height:10),
+              Center(child:TextButton(onPressed: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserInfoScreen(f: (){
                   fetchData();
                 })));
 
-              }, child:Text("Add a password")),
+              }, child:Container(
+                width: w * 0.5,
+                height: h * 0.05,
+                padding: const EdgeInsets.symmetric(horizontal: 29, vertical: 15),
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF577DF5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(27),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Add a new password',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontFamily: 'Outfit',
+                        fontWeight: FontWeight.w500,
+                        height: 0.07,
+                      ),
+                    ),
+                  ],
+                ),
+              ))),
+              SizedBox(height: 10,),
             Text(
               'Password Strength tester',
               style: TextStyle(
@@ -222,17 +254,60 @@ class PasswordListScreenState extends State<PasswordListScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
+          SizedBox(height: 10,),
           TextField(
             controller: passwordController,
             decoration: InputDecoration(
               hintText: 'Enter a password',
-              border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+// Rounded corners
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when focused
+                )
             ),
           ), SizedBox(height: 10),feedbackWidget, // Add some spacing between Textfield and button
-          ElevatedButton(
+          Center(child:TextButton(
             onPressed: submitPassword,
-            child: Text('Test'),
-          ),
+            child: Container(
+              width: w * 0.5,
+              height: h * 0.05,
+              padding: const EdgeInsets.symmetric(horizontal: 29, vertical: 15),
+              clipBehavior: Clip.antiAlias,
+              decoration: ShapeDecoration(
+                color: Color(0xFF577DF5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(27),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Test strength',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: 'Outfit',
+                      fontWeight: FontWeight.w500,
+                      height: 0.07,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )),
 
           ],)
           ),

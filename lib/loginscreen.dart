@@ -45,21 +45,54 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    double h = size.height, w = size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        backgroundColor: Color(0xfff5f7ff),
       ),
+      backgroundColor: Color(0xfff5f7ff),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             children: [
+              Image.asset('assets/lock.png'),
+              Align(alignment: Alignment.centerLeft,child: Text(
+                'Welcome back!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF0B1533),
+                  fontSize: 24,
+                  fontFamily: 'Outfit',
+                  fontWeight: FontWeight.w400,
+                ),
+              )),
+              SizedBox(height: 20,),
               TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: 'Email / Phone Number',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+// Rounded corners
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when focused
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -74,6 +107,21 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+// Rounded corners
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when enabled
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 2.0), // Border color and width when focused
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -83,18 +131,46 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               SizedBox(height: 20.0),
-              ElevatedButton(
+              TextButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     // Call the sign-in function here
                     _signInWithEmailAndPassword();
                   }
                 },
-                child: Text('Login'),
+                child: Container(
+                  width: w,
+                  height: h * 0.06,
+                  padding: const EdgeInsets.symmetric(horizontal: 29, vertical: 15),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFF577DF5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Log in',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Outfit',
+                          fontWeight: FontWeight.w500,
+                          height: 0.07,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
-        ),
+        ),)
       ),
     );
   }
