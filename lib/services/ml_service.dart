@@ -60,6 +60,37 @@ class MLService {
     this._predictedData = List.from(output);
   }
 
+  List<int> localitySensitiveHashing(List<double> data, {int numHashes = 10, int numBuckets = 100}) {
+    if (data.isEmpty || numHashes <= 0 || numBuckets <= 0) {
+      throw ArgumentError('Invalid input parameters');
+    }
+
+    List<List<int>> hashTables = List.generate(numHashes, (index) => List.filled(numBuckets, 0));
+
+    Random random = Random.secure(); // Use a more secure random number generator
+
+    for (int hashIndex = 0; hashIndex < numHashes; hashIndex++) {
+      double a = random.nextDouble() * 1000; // Increased randomness
+      double b = random.nextDouble() * 1000; // Increased randomness
+
+      for (double value in data) {
+        int hashValue = ((a * value + b) * numBuckets).floor() % numBuckets;
+        hashTables[hashIndex][hashValue] = 1;
+      }
+    }
+
+    List<int> hashValues = List.filled(numHashes, 0);
+    for (int hashIndex = 0; hashIndex < numHashes; hashIndex++) {
+      int combinedHash = 0;
+      for (int i = 0; i < numBuckets; i++) {
+        combinedHash += hashTables[hashIndex][i] * (i + 1);
+      }
+      hashValues[hashIndex] = combinedHash % numBuckets;
+    }
+
+    return hashValues;
+  }
+
   Future<User?> predict() async {
     return _searchResult(this._predictedData);
   }

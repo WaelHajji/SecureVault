@@ -23,38 +23,32 @@ class PasswordListScreenState extends State<PasswordListScreen> {
     // Initialize feedback and suggestions
     String feedback = '';
     String suggestions = '';
-
     // Check password length
     if (password.length < 8) {
       feedback += 'Password is too short. ';
       suggestions += 'Consider making it at least 8 characters long. ';
     }
-
     // Check for presence of uppercase letters
     if (!password.contains(RegExp(r'[A-Z]'))) {
       feedback += 'Password should contain at least one uppercase letter. ';
       suggestions += 'Consider adding uppercase letters. ';
     }
-
     // Check for presence of lowercase letters
     if (!password.contains(RegExp(r'[a-z]'))) {
       feedback += 'Password should contain at least one lowercase letter. ';
       suggestions += 'Consider adding lowercase letters. ';
     }
-
     // Check for presence of digits
     if (!password.contains(RegExp(r'[0-9]'))) {
       feedback += 'Password should contain at least one digit. ';
       suggestions += 'Consider adding digits. ';
     }
-
     // Check for presence of special characters
     if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
       feedback +=
       'Password should contain at least one special character. ';
       suggestions += 'Consider adding special characters. ';
     }
-
     // Return feedback and suggestions
     if (feedback.isEmpty) {
       return 'Password is strong.';
@@ -338,6 +332,47 @@ class PasswordWidget extends StatelessWidget{
     complexityScore += hasNumber ? 1 : 0;
     complexityScore += hasSpecialChar ? 1 : 0;
 
+    return complexityScore;
+  }
+
+  double checkPasswordSecurity(String password) {
+    if (password.isEmpty) {
+      return 0.0;
+    }
+
+    int length = password.length;
+    bool hasUpperCase = password.contains(RegExp(r'[A-Z]'));
+    bool hasLowerCase = password.contains(RegExp(r'[a-z]'));
+    bool hasNumber = password.contains(RegExp(r'[0-9]'));
+    bool hasSpecialChar = password.contains(RegExp(r'[!@#$%^&*()_+\-=\[\]{}|;:,./<>?~]'));
+
+    const double lengthCoefficient = 2.0;
+    const double upperCaseCoefficient = 3.0;
+    const double lowerCaseCoefficient = 2.0;
+    const double numberCoefficient = 3.0;
+    const double specialCharCoefficient = 4.0;
+
+    double complexityScore = 0.0;
+    complexityScore += (length >= 8 ? 1 : 0) * lengthCoefficient * 12.0;
+    complexityScore += (hasUpperCase ? 1 : 0) * upperCaseCoefficient * 14.0;
+    complexityScore += (hasLowerCase ? 1 : 0) * lowerCaseCoefficient * 15.0;
+    complexityScore += (hasNumber ? 1 : 0) * numberCoefficient * 11.0;
+    complexityScore += (hasSpecialChar ? 1 : 0) * specialCharCoefficient * 13.0;
+
+    const double upperLowerBonus = 2.0 * 16.0;
+    const double numberSpecialBonus = 3.0 * 17.0;
+    const double allFeaturesBonus = 5.0 * 18.0;
+
+    if (hasUpperCase && hasLowerCase) {
+      complexityScore += upperLowerBonus;
+    }
+    if (hasNumber && hasSpecialChar) {
+      complexityScore += numberSpecialBonus;
+    }
+    if (length >= 12 && hasUpperCase && hasLowerCase
+        && hasNumber && hasSpecialChar) {
+      complexityScore += allFeaturesBonus;
+    }
     return complexityScore;
   }
 
